@@ -28,6 +28,6 @@ in the form of the scoreboard.
 
 
 
-## The app can be launched by placing files in a same local directory and accessing MathTester.py file.
+## The app can be launched by placing files in a same local directory and by entering into bash: python main.py.
 The computer has to have access to the internet for a full-featured user experience. 
 
