@@ -1,7 +1,18 @@
 import random
 import csv
 import datetime
-import plotly.express as px
+import requests
+
+# Added feature of local temperature API.
+def whatisweather(): 
+  API_key = "f360ccaab20b5b1f7087127ed1a6d955"
+  base_url = "http://api.openweathermap.org/data/2.5/weather?"
+  zip_code = input("Enter your Zip code: ")
+  Final_url = base_url + "appid=" + API_key + "&zip=" + zip_code
+  weather_data = requests.get(Final_url).json()
+  localinf = weather_data['main']['temp']
+  ink = (localinf - 273.15) * 1.8 + 32
+  print('The temperature in ' + weather_data['name'] + " is " + str(round(ink)) + 'F')
 
 # Function that starts the math assesment.   
 def teststart():
@@ -27,6 +38,7 @@ def rannumone():
   return int(random.randint(1,1000))
 def rannumtwo(): 
   return int(random.randint(1, 1000))
+
 # Saving the score and the name to .csv
 def saveit(scoreright, questsize):
   wannasave = input(str("Would you like to save your score to a .csv? Y/N?")).lower()
@@ -36,10 +48,12 @@ def saveit(scoreright, questsize):
     spamwriter = csv.writer(csvfile, delimiter=',',quotechar=' ', quoting=csv.QUOTE_MINIMAL)
     timewrite = '{:%Y-%m-%d}'.format(datetime.datetime.now())
     spamwriter.writerow([namez] + [scoreright] + [questsize] + [timewrite])
-    scoreboard()
+    again()
   else:
-    print('Fine, dont save it')   
-    scoreboard()
+    print('Fine, dont save it')  
+    again() 
+
+# Function that reads .csv vile and displays the Name, Score and Date
 def scoreboard():
   wannsee = input('Would you like to see the scoreboard? Y/N ').lower()
   if wannsee == 'y':
@@ -57,16 +71,16 @@ def scoreboard():
   else:
     print('Okay.')
 
-def plot():
-  df = px.data.gapminder().query("country=='Canada'")
-  fig = px.line(df, x="year", y="lifeExp", title='Life expectancy in Canada')
-  fig.show()
-
-
-
-
+# Asks for another try at it.
+def again():
+  anothertry = input('Do you want to try again? Y/N ').lower()
+  if anothertry == "y":
+    teststart()
+  else:
+    print('Goodbye!')
 
 # Start Menu where user is asked to put in their name and ask whether or not they want to take the math challenge.  
+whatisweather()
 namez = input(" Please enter your name:")
 scoreboard()
 print("Would you like to test your computational skills??")
@@ -77,11 +91,3 @@ if wannaplay == "y":
   teststart()
 else:
   print("Please feel free to start when you're ready")
-
-
-
-
-
-
-
-    
