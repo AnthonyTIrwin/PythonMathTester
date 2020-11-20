@@ -4,12 +4,9 @@ import datetime
 
 # Function that starts the math assesment.   
 def teststart():
-  
   scoreright = 0
   counter = 0
-  
   while counter < questsize:
-
     testvaraone = rannumone()
     testvaratwo = rannumtwo()
     
@@ -37,8 +34,6 @@ def rannumone():
 def rannumtwo():
   return int(random.randint(1, 1000))
 
-
-
 # Saving the score and the name to .csv
 
 def saveit(scoreright):
@@ -59,11 +54,6 @@ def saveit(scoreright):
   
 
     # Start Menu where user is asked to put in their name and ask whether or not they want to take the math challenge.  
-
-
-
-
-
 
 namez = input(" Please enter your name:")
 
